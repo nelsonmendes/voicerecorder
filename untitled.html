@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TO-DO-LIST com comando de voz</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<style type="text/css">
+ 
+	form,div {width:400px; margin:0 auto;}
+	ul { list-style:none;}
+</style>
+ 
+<!-- Código do JQuery para o TO-DO-LIST VIA COMANDO DE VOZ -->
+<script type="text/javascript">
+	$(document).ready(function(e) {
+ 
+		// escuto a mudança do texto quando for preenchido
+		// o campo e executo uma função
+        $("#nova_tarefa").live('webkitspeechchange','',function(e){
+ 
+				addTarefa($(this).val());
+		});
+ 
+		// limpar todas as tarefas adicionadas
+		$("#btnLimpar").click(function(e) {
+            	$("#tarefas").html('');
+        });
+    });
+ 
+		function addTarefa(value){
+				$("#tarefas").append('<li><input type="checkbox"/>'+value+'</li>');
+				$("#nova_tarefa").val('');
+		}
+</script>
+ 
+ 
+</head>
+ 
+<body>
+	<form>
+    	<fieldset>
+        <label>Nova tarefa:</label>
+        <input id="nova_tarefa" x-webkit-grammar="builtin:search" lang="pt-BR" type="text" speech x-webkit-speech/>
+		 <a href="#" id="btnLimpar">Limpar lista</a>
+    	</fieldset>
+    </form>
+    <div>
+    		<ul id="tarefas">
+            </ul>
+    </div>
+</body>
+</html>
